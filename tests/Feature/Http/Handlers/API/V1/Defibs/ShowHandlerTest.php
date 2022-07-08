@@ -12,9 +12,8 @@ use function Pest\Laravel\getJson;
 it('returns defib details for an authenticated user', function () {
     Sanctum::actingAs(User::factory()->create());
     $defib = Defib::factory()->create();
-    $defibResource = new DefibResource($defib);
 
     getJson(route('api:v1:defibs:show', $defib->id))
         ->assertOk()
-        ->assertExactJson($defibResource->jsonSerialize());
+        ->assertExactJson(['data' => (new DefibResource($defib))->jsonSerialize()]);
 });

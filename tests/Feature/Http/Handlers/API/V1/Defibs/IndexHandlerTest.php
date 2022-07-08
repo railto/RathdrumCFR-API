@@ -11,26 +11,22 @@ use App\Http\Resources\API\V1\DefibResource;
 use function Pest\Laravel\getJson;
 
 it('returns a list of publicly accessible defibs to a guest', function () {
-    $public = Defib::factory(random_int(1, 10))->public()->create();
-    $private = Defib::factory(random_int(1, 10))->private()->create();
-
-    $publicResource = DefibResource::collection($public);
-    $privateResource = DefibResource::collection($private);
+    $public = Defib::factory(rand(1, 100))->public()->create();
+    $private = Defib::factory(rand(1, 100))->private()->create();
 
     getJson(route('api:v1:defibs:index'))
         ->assertOk()
-        ->assertJsonCount($public->count())
-        ->assertExactJson($publicResource->jsonSerialize())
-        ->assertJsonMissingExact($privateResource->jsonSerialize());
+        ->assertJsonCount($public->count(), 'data')
+        ->assertExactJson(['data' => DefibResource::collection($public)->jsonSerialize()])
+        ->assertJsonMissingExact(['data' => DefibResource::collection($private)]);
 });
 
 it('returns a list of all defibs to an authenticated user', function () {
     Sanctum::actingAs(User::factory()->create());
-    $defibs = Defib::factory(random_int(1, 10))->create();
-    $defibResourceCollection = DefibResource::collection($defibs);
+    $defibs = Defib::factory(rand(1, 100))->create();
 
     getJson(route('api:v1:defibs:index'))
         ->assertOk()
-        ->assertJsonCount($defibs->count())
-        ->assertExactJson($defibResourceCollection->jsonSerialize());
+        ->assertJsonCount($defibs->count(), 'data')
+        ->assertExactJson(['data' => DefibResource::collection($defibs)->jsonSerialize()]);
 });

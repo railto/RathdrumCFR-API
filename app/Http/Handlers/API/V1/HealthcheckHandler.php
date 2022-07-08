@@ -11,6 +11,6 @@ class HealthcheckHandler
 {
     public function __invoke(Request $request): JsonResponse
     {
-        return new JsonResponse(data: ['ping' => time()]);
+        return new JsonResponse(['ping' => time()]);
     }
 }

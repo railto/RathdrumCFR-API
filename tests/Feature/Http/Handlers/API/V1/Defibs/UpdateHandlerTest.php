@@ -16,9 +16,8 @@ it('allows an authenticated user to update a defib', function () {
     Sanctum::actingAs(User::factory()->create());
     $defib = Defib::factory()->create();
     $defib->name = 'Updated Defib';
-    $resource = new DefibResource($defib);
 
     putJson(route('api:v1:defibs:update', $defib->id), $defib->toArray())
         ->assertStatus(Http::ACCEPTED)
-        ->assertExactJson($resource->jsonSerialize());
+        ->assertExactJson(['data' => (new DefibResource($defib))->jsonSerialize()]);
 });

@@ -18,6 +18,6 @@ class IndexHandler
             $defibs = Defib::all();
         }
 
-        return new JsonResponse(data: DefibResource::collection(resource: $defibs), status: Http::OK);
+        return new JsonResponse(['data' => DefibResource::collection($defibs)], Http::OK);
     }
 }
