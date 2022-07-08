@@ -5,6 +5,7 @@ namespace App\Models;
 use Snowflake\Snowflakes;
 use Snowflake\SnowflakeCast;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +36,11 @@ class Defib extends Model
         'display_on_map' => 'boolean',
         'serial' => 'string',
     ];
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(DefibNote::class);
+    }
 
     public function scopePublic(Builder $query): Builder
     {
