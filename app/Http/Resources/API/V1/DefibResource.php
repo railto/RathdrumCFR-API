@@ -12,6 +12,7 @@ class DefibResource extends JsonResource
     public function toArray($request): array
     {
         $data = [
+            'id' => $this->id,
             'name' => $this->name,
             'location' => $this->location,
             'coordinates' => $this->coordinates,
