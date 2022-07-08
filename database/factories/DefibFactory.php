@@ -22,4 +22,18 @@ class DefibFactory extends Factory
             'coordinates' => $this->faker->latitude . ', ' . $this->faker->longitude,
         ];
     }
+
+    public function public(): self
+    {
+        return $this->state(fn(array $attributes) => [
+            'display_on_map' => true,
+        ]);
+    }
+
+    public function private(): self
+    {
+        return $this->state(fn(array $attributes) => [
+            'display_on_map' => false,
+        ]);
+    }
 }
