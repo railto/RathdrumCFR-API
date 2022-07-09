@@ -8,7 +8,7 @@ use JustSteveKing\StatusCode\Http;
 use App\Http\Resources\API\V1\DefibResource;
 use App\Http\Requests\API\V1\StoreDefibRequest;
 
-class UpdateHandler
+class UpdateDefibHandler
 {
     public function __invoke(StoreDefibRequest $request, Defib $defib): JsonResponse
     {

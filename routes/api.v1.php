@@ -3,19 +3,31 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Handlers\API\V1\HealthcheckHandler;
+use App\Http\Handlers\API\V1\Defibs\ShowDefibHandler;
+use App\Http\Handlers\API\V1\Defibs\ListDefibsHandler;
+use App\Http\Handlers\API\V1\Defibs\StoreDefibHandler;
+use App\Http\Handlers\API\V1\Defibs\UpdateDefibHandler;
+use App\Http\Handlers\API\V1\Members\StoreMemberHandler;
+use App\Http\Handlers\API\V1\Defibs\Notes\StoreDefibNoteHandler;
 
-Route::get('/', App\Http\Handlers\API\V1\HealthcheckHandler::class)->name('ping');
+Route::get('/', HealthcheckHandler::class)->name('ping');
 
-Route::prefix('defibs')->as('defibs:')->group(static function (): void {
-    Route::get('/', App\Http\Handlers\API\V1\Defibs\IndexHandler::class)->name('index');
+Route::get('defibs/', ListDefibsHandler::class)->name('defibs:index');
 
-    Route::middleware(['auth:sanctum'])->group(static function (): void {
-        Route::post('/', App\Http\Handlers\API\V1\Defibs\StoreHandler::class)->name('store');
-        Route::get('/{defib}', App\Http\Handlers\API\V1\Defibs\ShowHandler::class)->name('show');
-        Route::put('/{defib}', App\Http\Handlers\API\V1\Defibs\UpdateHandler::class)->name('update');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('defibs')->as('defibs:')->group(function () {
+        Route::post('/', StoreDefibHandler::class)->name('store');
+        Route::get('/{defib}', ShowDefibHandler::class)->name('show');
+        Route::put('/{defib}', UpdateDefibHandler::class)->name('update');
 
-        Route::prefix('/{defib}/notes')->as('notes:')->group(static function (): void {
-            Route::post('/', App\Http\Handlers\API\V1\Defibs\Notes\StoreHandler::class)->name('store');
+        Route::prefix('/{defib}/notes')->as('notes:')->group(function () {
+            Route::post('/', StoreDefibNoteHandler::class)->name('store');
         });
     });
+
+    Route::prefix('members')->as('members:')->group(function () {
+        Route::post('/', StoreMemberHandler::class)->name('store');
+    });
 });
+
