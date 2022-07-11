@@ -13,7 +13,7 @@ it('returns defib details for an authenticated user', function () {
     Sanctum::actingAs(User::factory()->create());
     $defib = Defib::factory()->create();
 
-    getJson(route('api:v1:defibs:show', $defib->id))
+    getJson(route('api:v1:defibs:show', $defib->uuid))
         ->assertOk()
         ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
 });

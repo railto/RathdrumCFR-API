@@ -9,7 +9,7 @@ class MemberResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->resource->id,
+            'uuid' => $this->resource->uuid,
             'name' => $this->resource->name,
             'phone' => $this->resource->phone,
             'email' => $this->resource->email,

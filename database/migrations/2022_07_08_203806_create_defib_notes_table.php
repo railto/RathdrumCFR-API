@@ -14,9 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('defib_notes', function (Blueprint $table) {
-            $table->snowflake()->primary();
-            $table->foreignSnowflake('defib_id')->constrained()->cascadeOnDelete();
-            $table->foreignSnowflake('user_id')->constrained();
+            $table->id();
+            $table->string('uuid')->unique();
+            $table->foreignId('defib_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained();
             $table->text('note');
             $table->timestamps();
         });

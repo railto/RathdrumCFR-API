@@ -17,7 +17,7 @@ it('allows an authenticated user to update a defib', function () {
     $defib = Defib::factory()->create();
     $defib->name = 'Updated Defib';
 
-    putJson(route('api:v1:defibs:update', $defib->id), $defib->toArray())
+    putJson(route('api:v1:defibs:update', $defib->uuid), $defib->toArray())
         ->assertStatus(Http::ACCEPTED)
         ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
 });

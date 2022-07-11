@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Snowflake\Snowflakes;
-use Snowflake\SnowflakeCast;
+use App\Traits\UsesUUID;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Defib extends Model
 {
+    use UsesUUID;
     use HasFactory;
-    use Snowflakes;
 
     protected $fillable = [
         'name',
@@ -29,7 +28,6 @@ class Defib extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
         'last_inspected_at' => 'datetime:Y-m-d',
         'pads_expire_at' => 'datetime:Y-m-d',
         'last_serviced_at' => 'datetime:Y-m-d',

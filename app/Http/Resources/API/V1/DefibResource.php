@@ -12,7 +12,7 @@ class DefibResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->resource->id,
+            'uuid' => $this->resource->uuid,
             'name' => $this->resource->name,
             'location' => $this->resource->location,
             'coordinates' => $this->resource->coordinates,

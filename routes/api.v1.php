@@ -18,10 +18,10 @@ Route::get('defibs/', ListDefibsHandler::class)->name('defibs:index');
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('defibs')->as('defibs:')->group(function () {
         Route::post('/', StoreDefibHandler::class)->name('store');
-        Route::get('/{defib}', ShowDefibHandler::class)->name('show');
-        Route::put('/{defib}', UpdateDefibHandler::class)->name('update');
+        Route::get('/{defib:uuid}', ShowDefibHandler::class)->name('show');
+        Route::put('/{defib:uuid}', UpdateDefibHandler::class)->name('update');
 
-        Route::prefix('/{defib}/notes')->as('notes:')->group(function () {
+        Route::prefix('/{defib:uuid}/notes')->as('notes:')->group(function () {
             Route::post('/', StoreDefibNoteHandler::class)->name('store');
         });
     });

@@ -13,7 +13,7 @@ it('allows an authenticated user to add a note to a defib', function () {
     Sanctum::actingAs(User::factory()->create());
     $defib = Defib::factory()->create();
 
-    $result = postJson(route('api:v1:defibs:notes:store', $defib->id), ['note' => 'This is a test note'])
+    $result = postJson(route('api:v1:defibs:notes:store', $defib->uuid), ['note' => 'This is a test note'])
         ->assertStatus(Http::CREATED);
 
     expect($result['data'])->toMatchArray($defib->with('notes'))

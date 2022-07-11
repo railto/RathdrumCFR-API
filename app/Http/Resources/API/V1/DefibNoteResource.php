@@ -9,10 +9,10 @@ class DefibNoteResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->resource->id,
-            'defib_id' => $this->resource->defib_id,
-            'user_id' => $this->resource->user_id,
+            'uuid' => $this->resource->uuid,
+            'author' => $this->resource->user->name,
             'note' => $this->resource->note,
+            'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
         ];
     }
 }

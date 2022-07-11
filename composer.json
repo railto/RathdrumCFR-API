@@ -11,9 +11,7 @@
         "juststeveking/http-status-code": "^2.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7",
-        "mattkingshott/snowflake": "^2.0",
-        "timacdonald/json-api": "^0.2.1"
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

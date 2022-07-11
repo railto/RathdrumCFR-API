@@ -14,7 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('defibs', function (Blueprint $table) {
-            $table->snowflake()->primary();
+            $table->id();
+            $table->string('uuid')->unique();
             $table->string('name')->nullable();
             $table->string('location');
             $table->string('coordinates')->nullable();

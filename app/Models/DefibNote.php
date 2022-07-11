@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Snowflake\Snowflakes;
-use Snowflake\SnowflakeCast;
+use App\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DefibNote extends Model
 {
+    use UsesUUID;
     use HasFactory;
-    use Snowflakes;
 
     protected $fillable = ['note'];
 
@@ -22,12 +21,13 @@ class DefibNote extends Model
         });
     }
 
-    protected $casts = [
-        'id' => SnowflakeCast::class,
-    ];
-
     public function defib(): BelongsTo
     {
         return $this->belongsTo(Defib::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

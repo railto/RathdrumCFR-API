@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use Snowflake\Snowflakes;
-use Snowflake\SnowflakeCast;
+use App\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
+    use UsesUUID;
     use HasFactory;
-    use Snowflakes;
 
     protected $fillable = [
         'name',
@@ -37,7 +36,6 @@ class Member extends Model
     ];
 
     protected $casts = [
-        'id' => SnowflakeCast::class,
         'cfr_certificate_expiry' => 'date:Y-m-d',
         'volunteer_declaration' => 'date:Y-m-d',
         'garda_vetting_date' => 'date:Y-m-d',
