@@ -32,7 +32,7 @@ it('allows an authenticated user to add an inspection to a defib', function () {
 it('will not allow a defib inspection to be saved with an invalid member_uuid', function () {
     Sanctum::actingAs(User::factory()->create());
     $defib = Defib::factory()->create();
-    $inspectionData = DefibInspection::factory()->make()->toArray();
+    $inspectionData = DefibInspection::factory(['member_uuid' => Str::uuid()->toString()])->make()->toArray();
 
     expect(DefibInspection::count())->toEqual(0);
 
@@ -45,12 +45,11 @@ it('will not allow a defib inspection to be saved with an invalid member_uuid', 
 
 it('will not allow an inspection to be created against a defib that does not exist', function () {
     Sanctum::actingAs(User::factory()->create());
-    $uuid = Str::uuid()->toString();
-    $inspectionData = DefibInspection::factory()->make()->toArray();
+    $inspectionData = DefibInspection::factory(['member_uuid' => Str::uuid()->toString()])->make()->toArray();
 
     expect(DefibInspection::count())->toEqual(0);
 
-    postJson(route('api:v1:defibs:inspections:store', ['uuid' => $uuid]), $inspectionData)
+    postJson(route('api:v1:defibs:inspections:store', ['uuid' => Str::uuid()->toString()]), $inspectionData)
         ->assertStatus(Http::NOT_FOUND);
 
     expect(DefibInspection::count())->toEqual(0);

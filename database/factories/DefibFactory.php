@@ -11,7 +11,7 @@ class DefibFactory extends Factory
 {
     public function definition(): array
     {
-        $user = User::firstOrCreate(['name' => $this->faker->name(), 'email' => $this->faker->email(), 'password' => 'password']);
+        $user = User::count() > 0 ? User::get()->random() : User::factory()->create();
 
         return [
             'name' => $this->faker->streetName(),

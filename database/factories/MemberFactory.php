@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MemberFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
+        $user = User::count() > 0 ? User::get()->random() : User::factory()->create();
+
         return [
-            'user_id' => User::factory()->create(),
+            'user_id' => $user->id,
             'name' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
