@@ -39,8 +39,8 @@ return new class () extends Migration {
             $table->date('hiqa_completed')->nullable();
             $table->date('covid_return_completed')->nullable();
             $table->date('ppe_assessment_completed')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

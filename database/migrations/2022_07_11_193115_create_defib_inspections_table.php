@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('pads_expire_at');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -6,7 +6,9 @@ namespace App\Models;
 
 use App\Traits\UsesUUID;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\StoresAuthenticatedUser;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -14,6 +16,8 @@ class Defib extends Model
 {
     use UsesUUID;
     use HasFactory;
+    use SoftDeletes;
+    use StoresAuthenticatedUser;
 
     protected $fillable = [
         'name',

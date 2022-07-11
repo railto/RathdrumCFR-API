@@ -5,12 +5,14 @@ namespace App\Models;
 use App\Traits\UsesUUID;
 use App\Traits\StoresAuthenticatedUser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DefibInspection extends Model
 {
     use UsesUUID;
     use HasFactory;
+    use SoftDeletes;
     use StoresAuthenticatedUser;
 
     protected $fillable = ['member_id', 'inspected_at', 'pads_expire_at', 'notes'];

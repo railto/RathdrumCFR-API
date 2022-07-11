@@ -14,6 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('defibs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('uuid')->unique();
             $table->string('name')->nullable();
             $table->string('location');
@@ -27,6 +28,7 @@ return new class () extends Migration {
             $table->timestamp('last_serviced_at')->nullable();
             $table->timestamp('pads_expire_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

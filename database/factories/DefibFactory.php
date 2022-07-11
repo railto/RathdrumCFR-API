@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DefibFactory extends Factory
 {
     public function definition(): array
     {
+        $user = User::firstOrCreate(['name' => $this->faker->name(), 'email' => $this->faker->email(), 'password' => 'password']);
+
         return [
             'name' => $this->faker->streetName(),
+            'user_id' => $user->id,
             'location' => $this->faker->streetAddress(),
             'owner' => $this->faker->name(),
             'model' => 'iPad CU-SP1',
