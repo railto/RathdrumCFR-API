@@ -29,14 +29,14 @@ class DefibFactory extends Factory
         ];
     }
 
-    public function public(): self
+    public function public(): static
     {
         return $this->state(fn (array $attributes) => [
             'display_on_map' => true,
         ]);
     }
 
-    public function private(): self
+    public function private(): static
     {
         return $this->state(fn (array $attributes) => [
             'display_on_map' => false,
