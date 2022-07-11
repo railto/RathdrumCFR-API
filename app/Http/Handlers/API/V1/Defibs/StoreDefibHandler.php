@@ -14,6 +14,6 @@ class StoreDefibHandler
     {
         $defib = Defib::create($request->validated());
 
-        return new JsonResponse(['data' => new DefibResource($defib)], Http::CREATED);
+        return new JsonResponse(['data' => DefibResource::make($defib)], Http::CREATED);
     }
 }

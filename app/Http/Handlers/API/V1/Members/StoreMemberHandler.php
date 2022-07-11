@@ -14,6 +14,6 @@ class StoreMemberHandler
     {
         $member = Member::create($request->validated());
 
-        return new JsonResponse(['data' => new MemberResource($member)], Http::CREATED);
+        return new JsonResponse(['data' => MemberResource::make($member)], Http::CREATED);
     }
 }

@@ -15,5 +15,5 @@ it('returns defib details for an authenticated user', function () {
 
     getJson(route('api:v1:defibs:show', $defib->id))
         ->assertOk()
-        ->assertExactJson(['data' => (new DefibResource($defib))->jsonSerialize()]);
+        ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
 });

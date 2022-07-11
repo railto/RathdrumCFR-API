@@ -24,7 +24,7 @@ it('allows an authenticated user to create a new defib', function () {
     $defib = Defib::first();
 
     $result->assertStatus(Http::CREATED)
-        ->assertExactJson(['data' => (new DefibResource($defib))->jsonSerialize()]);
+        ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
 });
 
 it('does not allow an unauthenticated user to create a new defib', function () {

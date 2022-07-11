@@ -12,6 +12,6 @@ class ShowDefibHandler
 {
     public function __invoke(Request $request, Defib $defib): JsonResponse
     {
-        return new JsonResponse(['data' => new DefibResource($defib)], Http::OK);
+        return new JsonResponse(['data' => DefibResource::make($defib)], Http::OK);
     }
 }

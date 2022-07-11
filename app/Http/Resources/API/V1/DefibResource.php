@@ -11,15 +11,12 @@ class DefibResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $data = [
+        return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'location' => $this->resource->location,
             'coordinates' => $this->resource->coordinates,
-        ];
-
-        if (auth('sanctum')->check()) {
-            $data = array_merge($data, [
+            $this->mergeWhen(auth('sanctum')->check(),[
                 'display_on_map' => $this->resource->display_on_map,
                 'model' => $this->resource->model,
                 'serial' => $this->resource->serial,
@@ -29,9 +26,7 @@ class DefibResource extends JsonResource
                 'last_serviced_at' => $this->resource->last_services_at,
                 'pads_expire_at' => $this->resource->pads_expire_at,
                 'notes' => DefibNoteResource::collection($this->resource->notes),
-            ]);
-        }
-
-        return $data;
+            ]),
+        ];
     }
 }

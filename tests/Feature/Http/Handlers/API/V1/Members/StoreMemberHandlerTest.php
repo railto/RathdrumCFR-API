@@ -23,5 +23,5 @@ it('allows an authenticated user to create a new member record', function () {
     $member = Member::first();
 
     $result->assertStatus(Http::CREATED)
-        ->assertExactJson(['data' => (new MemberResource($member))->jsonSerialize()]);
+        ->assertExactJson(['data' => (MemberResource::make($member))->jsonSerialize()]);
 });

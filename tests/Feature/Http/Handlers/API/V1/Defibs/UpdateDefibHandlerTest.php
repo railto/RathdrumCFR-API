@@ -19,5 +19,5 @@ it('allows an authenticated user to update a defib', function () {
 
     putJson(route('api:v1:defibs:update', $defib->id), $defib->toArray())
         ->assertStatus(Http::ACCEPTED)
-        ->assertExactJson(['data' => (new DefibResource($defib))->jsonSerialize()]);
+        ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
 });

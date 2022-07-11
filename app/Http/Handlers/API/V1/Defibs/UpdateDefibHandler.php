@@ -14,6 +14,6 @@ class UpdateDefibHandler
     {
         $defib->update($request->validated());
 
-        return new JsonResponse(['data' => new DefibResource($defib)], Http::ACCEPTED);
+        return new JsonResponse(['data' => DefibResource::make($defib)], Http::ACCEPTED);
     }
 }
