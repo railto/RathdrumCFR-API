@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\UsesUUID;
@@ -19,11 +21,6 @@ class DefibNote extends Model
         static::creating(function ($note) {
             $note->user_id = auth()->user()->id;
         });
-    }
-
-    public function defib(): BelongsTo
-    {
-        return $this->belongsTo(Defib::class);
     }
 
     public function user(): BelongsTo

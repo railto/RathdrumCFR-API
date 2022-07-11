@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Models\User;
 use App\Models\Defib;
-
 use Laravel\Sanctum\Sanctum;
+use JustSteveKing\StatusCode\Http;
 use App\Http\Resources\API\V1\DefibResource;
 
 use function Pest\Laravel\getJson;
@@ -15,7 +15,7 @@ it('returns a list of publicly accessible defibs to a guest', function () {
     $private = Defib::factory(rand(1, 100))->private()->create();
 
     getJson(route('api:v1:defibs:index'))
-        ->assertOk()
+        ->assertStatus(Http::OK)
         ->assertJsonCount($public->count(), 'data')
         ->assertExactJson(['data' => DefibResource::collection($public)->jsonSerialize()])
         ->assertJsonMissingExact(['data' => DefibResource::collection($private)]);

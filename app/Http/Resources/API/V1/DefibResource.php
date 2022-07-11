@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources\API\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,7 +18,7 @@ class DefibResource extends JsonResource
             'name' => $this->resource->name,
             'location' => $this->resource->location,
             'coordinates' => $this->resource->coordinates,
-            $this->mergeWhen(auth('sanctum')->check(),[
+            $this->mergeWhen(auth('sanctum')->check(), [
                 'display_on_map' => $this->resource->display_on_map,
                 'model' => $this->resource->model,
                 'serial' => $this->resource->serial,

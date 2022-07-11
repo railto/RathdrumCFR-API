@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Handlers\API\V1\Defibs;
 
 use App\Models\Defib;
@@ -10,8 +12,14 @@ use App\Http\Requests\API\V1\StoreDefibRequest;
 
 class UpdateDefibHandler
 {
-    public function __invoke(StoreDefibRequest $request, Defib $defib): JsonResponse
+    public function __invoke(StoreDefibRequest $request, string $uuid): JsonResponse
     {
+        $defib = Defib::query()->with('notes')->where('uuid', $uuid)->first();
+
+        if (!$defib) {
+            return new JsonResponse([], Http::NOT_FOUND);
+        }
+
         $defib->update($request->validated());
 
         return new JsonResponse(['data' => DefibResource::make($defib)], Http::ACCEPTED);

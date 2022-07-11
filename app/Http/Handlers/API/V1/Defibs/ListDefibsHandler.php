@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Handlers\API\V1\Defibs;
 
 use App\Models\Defib;
@@ -15,7 +17,7 @@ class ListDefibsHandler
         $defibs = Defib::query()->public()->get();
 
         if (auth('sanctum')->check()) {
-            $defibs = Defib::all();
+            $defibs = Defib::with('notes')->get();
         }
 
         return new JsonResponse(['data' => DefibResource::collection($defibs)], Http::OK);
