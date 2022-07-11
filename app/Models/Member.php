@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Traits\UsesUUID;
+use App\Traits\StoresAuthenticatedUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,7 @@ class Member extends Model
 {
     use UsesUUID;
     use HasFactory;
+    use StoresAuthenticatedUser;
 
     protected $fillable = [
         'name',
@@ -50,11 +52,4 @@ class Member extends Model
         'covid_return_completed' => 'date:Y-m-d',
         'ppe_assessment_completed' => 'date:Y-m-d',
     ];
-
-    protected static function booted()
-    {
-        static::creating(function ($member) {
-            $member->user_id = auth()->user()->id;
-        });
-    }
 }

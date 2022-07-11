@@ -17,7 +17,7 @@ class ListDefibsHandler
         $defibs = Defib::query()->public()->get();
 
         if (auth('sanctum')->check()) {
-            $defibs = Defib::with('notes')->get();
+            $defibs = Defib::with(['notes', 'inspections'])->get();
         }
 
         return new JsonResponse(['data' => DefibResource::collection($defibs)], Http::OK);

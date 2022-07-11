@@ -42,6 +42,11 @@ class Defib extends Model
         return $this->hasMany(DefibNote::class);
     }
 
+    public function inspections(): HasMany
+    {
+        return $this->hasMany(DefibInspection::class);
+    }
+
     public function scopePublic(Builder $query): Builder
     {
         return $query->where('display_on_map', true);

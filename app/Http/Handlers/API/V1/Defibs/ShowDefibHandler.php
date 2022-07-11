@@ -14,7 +14,7 @@ class ShowDefibHandler
 {
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
-        $defib = Defib::query()->with('notes')->where('uuid', $uuid)->first();
+        $defib = Defib::query()->with(['notes', 'inspections'])->where('uuid', $uuid)->first();
 
         if (!$defib) {
             return new JsonResponse([], Http::NOT_FOUND);

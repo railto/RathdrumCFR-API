@@ -28,6 +28,7 @@ class DefibResource extends JsonResource
                 'last_serviced_at' => $this->resource->last_services_at,
                 'pads_expire_at' => $this->resource->pads_expire_at,
                 'notes' => DefibNoteResource::collection($this->resource->notes),
+                'inspections' => DefibInspectionResource::collection($this->resource->inspections),
             ]),
         ];
     }

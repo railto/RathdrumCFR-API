@@ -10,6 +10,7 @@ use App\Http\Handlers\API\V1\Defibs\StoreDefibHandler;
 use App\Http\Handlers\API\V1\Defibs\UpdateDefibHandler;
 use App\Http\Handlers\API\V1\Members\StoreMemberHandler;
 use App\Http\Handlers\API\V1\Defibs\Notes\StoreDefibNoteHandler;
+use App\Http\Handlers\API\V1\Defibs\Inspections\StoreDefibInspectionsHandler;
 
 Route::get('/', HealthcheckHandler::class)->name('ping');
 
@@ -24,12 +25,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::prefix('/{uuid}/notes')->as('notes:')->group(function () {
             Route::post('/', StoreDefibNoteHandler::class)->name('store');
         });
+
+        Route::prefix('/{uuid}/inspections')->as('inspections:')->group(function () {
+            Route::post('/', StoreDefibInspectionsHandler::class)->name('store');
+        });
     });
 
     Route::prefix('members')->as('members:')->group(function () {
         Route::post('/', StoreMemberHandler::class)->name('store');
-        Route::get('/', function () {
-            return \App\Http\Resources\API\V1\MemberResource::collection(\App\Models\Member::all());
-        });
     });
 });
