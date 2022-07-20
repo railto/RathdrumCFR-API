@@ -11,7 +11,7 @@ use App\Http\Resources\API\V1\DefibResource;
 use function Pest\Laravel\getJson;
 
 it('returns defib details for an authenticated user', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.view'));
     $defib = Defib::factory()->create();
 
     getJson(route('api:v1:defibs:show', ['uuid' => $defib->uuid]))
@@ -20,7 +20,7 @@ it('returns defib details for an authenticated user', function () {
 });
 
 it('returns error if invalid uuid passed', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.view'));
     $uuid = Str::uuid()->toString();
 
     getJson(route('api:v1:defibs:show', ['uuid' => $uuid]))

@@ -12,8 +12,8 @@ use JustSteveKing\StatusCode\Http;
 
 use function Pest\Laravel\postJson;
 
-it('allows an authenticated user to add an inspection to a defib', function () {
-    Sanctum::actingAs(User::factory()->create());
+it('allows an authenticated user with permission to add an inspection to a defib', function () {
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.inspect'));
     $defib = Defib::factory()->create();
     $member = Member::factory()->create();
     $inspectionData = DefibInspection::factory(['member_uuid' => $member->uuid])->make()->toArray();
@@ -30,7 +30,7 @@ it('allows an authenticated user to add an inspection to a defib', function () {
 });
 
 it('will not allow a defib inspection to be saved with an invalid member_uuid', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.inspect'));
     $defib = Defib::factory()->create();
     $inspectionData = DefibInspection::factory(['member_uuid' => Str::uuid()->toString()])->make()->toArray();
 
@@ -44,7 +44,7 @@ it('will not allow a defib inspection to be saved with an invalid member_uuid', 
 });
 
 it('will not allow an inspection to be created against a defib that does not exist', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.inspect'));
     $inspectionData = DefibInspection::factory(['member_uuid' => Str::uuid()->toString()])->make()->toArray();
 
     expect(DefibInspection::count())->toEqual(0);

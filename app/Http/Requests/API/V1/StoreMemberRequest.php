@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\API\V1;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreMemberRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize(Request $request): bool
     {
-        return true;
+        return $request->user()->can('member.create');
     }
 
     public function rules(): array

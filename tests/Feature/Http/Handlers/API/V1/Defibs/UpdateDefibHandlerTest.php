@@ -11,7 +11,7 @@ use App\Http\Resources\API\V1\DefibResource;
 use function Pest\Laravel\putJson;
 
 it('allows an authenticated user to update a defib', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.update'));
     $defib = Defib::factory()->create();
     $defib->name = 'Updated Defib';
 
@@ -21,7 +21,7 @@ it('allows an authenticated user to update a defib', function () {
 });
 
 it('will not allow a user to update a defib that does not exist', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.update'));
     $defib = Defib::factory()->make();
     $uuid = Str::uuid()->toString();
 

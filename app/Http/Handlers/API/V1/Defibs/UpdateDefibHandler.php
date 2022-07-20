@@ -8,11 +8,11 @@ use App\Models\Defib;
 use Illuminate\Http\JsonResponse;
 use JustSteveKing\StatusCode\Http;
 use App\Http\Resources\API\V1\DefibResource;
-use App\Http\Requests\API\V1\StoreDefibRequest;
+use App\Http\Requests\API\V1\UpdateDefibRequest;
 
 class UpdateDefibHandler
 {
-    public function __invoke(StoreDefibRequest $request, string $uuid): JsonResponse
+    public function __invoke(UpdateDefibRequest $request, string $uuid): JsonResponse
     {
         $defib = Defib::query()->with(['notes', 'inspections'])->where('uuid', $uuid)->first();
 

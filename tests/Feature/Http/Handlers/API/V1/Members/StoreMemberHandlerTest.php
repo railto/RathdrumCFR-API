@@ -11,7 +11,7 @@ use App\Http\Resources\API\V1\MemberResource;
 use function Pest\Laravel\postJson;
 
 it('allows an authenticated user to create a new member record', function () {
-    Sanctum::actingAs(User::factory()->create());
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('member.create'));
     $data = Member::factory()->make()->toArray();
 
     expect(Member::count())->toEqual(0);

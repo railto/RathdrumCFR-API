@@ -10,8 +10,8 @@ use App\Http\Resources\API\V1\DefibResource;
 
 use function Pest\Laravel\postJson;
 
-it('allows an authenticated user to create a new defib', function () {
-    Sanctum::actingAs(User::factory()->create());
+it('allows an authenticated user with permission to create a new defib', function () {
+    Sanctum::actingAs(User::factory()->create()->givePermissionTo('defib.create'));
     $data = Defib::factory()->make()->toArray();
 
     expect(Defib::count())->toEqual(0);
@@ -23,6 +23,18 @@ it('allows an authenticated user to create a new defib', function () {
 
     $result->assertStatus(Http::CREATED)
         ->assertExactJson(['data' => (DefibResource::make($defib))->jsonSerialize()]);
+});
+
+it('does not allow an authenticated user without permission to create a new defib', function () {
+    Sanctum::actingAs(User::factory()->create());
+    $data = Defib::factory()->make()->toArray();
+
+    expect(Defib::count())->toEqual(0);
+
+    postJson(route('api:v1:defibs:store', $data))
+        ->assertStatus(Http::FORBIDDEN);
+
+    expect(Defib::count())->toEqual(0);
 });
 
 it('does not allow an unauthenticated user to create a new defib', function () {
