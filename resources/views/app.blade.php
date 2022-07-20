@@ -9,7 +9,7 @@
 
     @vite('resources/js/app.js')
 </head>
-<body>
+<body class="font-sans antialiased flex flex-col min-h-screen">
     <div id="app"></div>
 </body>
 </html>
