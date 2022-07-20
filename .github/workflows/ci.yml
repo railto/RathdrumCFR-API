@@ -36,6 +36,6 @@ jobs:
         run: php artisan key:generate
 
       - name: Execute tests
-        run: php artisan test --parallel --coverage
+        run: composer run coverage
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
