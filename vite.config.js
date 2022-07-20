@@ -9,10 +9,10 @@ let host = 'rathdrumcfr.test';
 
 export default defineConfig({
     plugins: [
-        laravel({
-            input: 'resources/js/app.js',
-            refresh: true,
-        }),
+        laravel([
+            'resources/js/app.js',
+            'resources/js/admin.js'
+        ]),
         vue({
             template: {
                 transformAssetUrls: {
