@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         Defib::factory(10)->create();
         DefibNote::factory(50)->create();
         DefibInspection::factory(150)->create();
+        $this->call(PermissionsSeeder::class);
     }
 }
