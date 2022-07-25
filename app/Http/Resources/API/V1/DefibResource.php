@@ -11,11 +11,11 @@ class DefibResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'uuid' => $this->resource->uuid,
             'name' => $this->resource->name,
             'location' => $this->resource->location,
             'coordinates' => $this->resource->coordinates,
             $this->mergeWhen(auth('sanctum')->check(), [
+                'uuid' => $this->resource->uuid,
                 'display_on_map' => $this->resource->display_on_map,
                 'model' => $this->resource->model,
                 'serial' => $this->resource->serial,
