@@ -5,6 +5,7 @@ import AuthenticatedLayout from '../Layouts/Authenticated.vue';
 
 import Dashboard from "../Pages/Dashboard.vue";
 import Login from "../Pages/Login.vue";
+import ListDefibs from "../Pages/ListDefibs.vue";
 
 function auth(to, from, next) {
     if (JSON.parse(localStorage.getItem('loggedIn'))) {
@@ -24,6 +25,11 @@ const routes = [
                 component: Dashboard,
                 name: 'dashboard',
             },
+            {
+                path: '/admin/defibs',
+                component: ListDefibs,
+                name: 'defibs.list',
+            }
         ]
     },
     {

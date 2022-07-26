@@ -1,10 +1,16 @@
 import {ref, reactive} from 'vue';
 import {useRouter} from 'vue-router';
 
+const user = reactive({
+    name: '',
+    email: '',
+});
+
 export default function useAuth() {
-    const processing = ref(false);
-    const validationErrors = ref({});
     const router = useRouter();
+    const validationErrors = ref({});
+    const processing = ref(false);
+
     const loginForm = reactive({
         email: '',
         password: '',
@@ -16,14 +22,9 @@ export default function useAuth() {
         processing.value = true;
         validationErrors.value = {};
 
-        const loginUser = (response) => {
-            localStorage.setItem('loggedIn', JSON.stringify(true))
-            router.push({name: 'dashboard'});
-        }
-
         await axios.post('/api/auth/login', loginForm)
             .then(async (response) => {
-                loginUser(response);
+                await loginUser(response);
             })
             .catch((error) => {
                 if (error.response?.data) {
@@ -35,5 +36,14 @@ export default function useAuth() {
             });
     }
 
-    return {loginForm, validationErrors, processing, submitLogin};
+    const loginUser = async (response) => {
+        user.name = response.data.user.name;
+        user.email = response.data.user.email;
+
+        localStorage.setItem('loggedIn', JSON.stringify(true))
+        localStorage.setItem('token', response.data.token);
+        await router.push({name: 'dashboard'});
+    }
+
+    return {loginForm, validationErrors, processing, submitLogin, user};
 };

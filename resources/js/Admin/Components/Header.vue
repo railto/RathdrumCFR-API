@@ -25,6 +25,11 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link :to="{name: 'defibs.list'}" @click="showMenu = false">
+                        Defibs
+                    </router-link>
+                </li>
+                <li>
                     <a href="/" @click="showMenu = false">
                         View Site
                     </a>

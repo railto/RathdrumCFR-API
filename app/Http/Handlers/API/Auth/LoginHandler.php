@@ -16,6 +16,11 @@ class LoginHandler
 
         $token = $request->user()->createToken($request->fingerprint());
 
-        return new JsonResponse(['token' => $token->plainTextToken], Http::OK);
+        $user = [
+            'name' => $request->user()->name,
+            'email' => $request->user()->email,
+        ];
+
+        return new JsonResponse(['token' => $token->plainTextToken, 'user' => $user], Http::OK);
     }
 }

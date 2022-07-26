@@ -9,9 +9,10 @@
 
 <script>
 import Header from "../Components/Header.vue";
+
 export default {
     name: "Authenticated",
-    components: {Header}
+    components: {Header},
 }
 </script>
 
