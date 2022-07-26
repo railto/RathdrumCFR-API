@@ -1,50 +1,53 @@
 <template>
-    <Disclosure as="nav" class="bg-red-800 mb-4" v-slot="{ open }">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
-                    <DisclosureButton
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true"/>
-                        <XIcon v-else class="block h-6 w-6" aria-hidden="true"/>
-                    </DisclosureButton>
-                </div>
-                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="text-white font-semibold">Rathdrum Community First Responders</span>
-                    </div>
-                    <div class="hidden sm:block sm:ml-6">
-                        <div class="flex space-x-4">
-                            <a v-for="item in navigation" :key="item.name" :href="item.href"
-                               :class="[item.current ? 'bg-red-900 text-white' : 'text-gray-300 hover:bg-red-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
-                               :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-                        </div>
-                    </div>
+    <header class="bg-red-700">
+        <nav class="container px-6 py-8 mx-auto md:flex md:justify-between md:items-center text-gray-100 mb-8">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-md font-semibold md:text-2xl">
+                    Rathdrum Community First Responders
+                </a>
+                <!-- Mobile menu button -->
+                <div @click="toggleMenu" class="flex md:hidden">
+                    <button type="button"
+                            class="focus:outline-none">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                            <path fill-rule="evenodd"
+                                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <DisclosurePanel class="sm:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
-                                  :class="[item.current ? 'bg-red-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
-                                  :aria-current="item.current ? 'page' : undefined">{{ item.name }}
-                </DisclosureButton>
-            </div>
-        </DisclosurePanel>
-    </Disclosure>
+            <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+            <ul :class="showMenu ? 'flex' : 'hidden'" class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0 text-md font-semibold md:text-lg">
+                <li>
+                    <router-link :to="{name: 'home'}" @click="showMenu = false">
+                        Home
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{name: 'contact'}" @click="showMenu = false">
+                        Contact Us
+                    </router-link>
+                </li>
+            </ul>
+        </nav>
+    </header>
 </template>
 
-<script setup>
-import {Disclosure, DisclosureButton, DisclosurePanel} from '@headlessui/vue'
-import {MenuIcon, XIcon} from '@heroicons/vue/outline'
+<script>
+import {ref} from 'vue'
 
-const navigation = [
-    {name: 'Home', href: '/', current: true},
-    {name: 'Contact Us', href: '/contact', current: false},
-]
+export default {
+    setup() {
+        let showMenu = ref(false);
+
+        const toggleMenu = () => {
+            showMenu.value = !showMenu.value;
+        }
+
+        return {showMenu, toggleMenu}
+    }
+}
 </script>
 
 <style scoped>

@@ -19,5 +19,6 @@ const routes = [
 export default createRouter({
     history: createWebHistory(),
     routes,
+    linkExactActiveClass: 'text-gray-300',
 });
 
