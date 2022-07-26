@@ -91,6 +91,11 @@
                         Contact Us
                     </button>
                 </div>
+                <div>
+                    <div class="text-gray-700 text-right text-xs" @click="resetContactForm">
+                        Reset Form
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -102,9 +107,9 @@ import useContact from "../Services/contact";
 export default {
     name: "Contact",
     setup() {
-        const {processing, successMessage, validationErrors, contactForm, submitForm} = useContact();
+        const {processing, successMessage, validationErrors, contactForm, submitForm, resetContactForm} = useContact();
 
-        return {processing, successMessage, validationErrors, contactForm, submitForm};
+        return {processing, successMessage, validationErrors, contactForm, submitForm, resetContactForm};
     }
 }
 </script>
