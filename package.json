@@ -5,6 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@dafcoe/vue-notification": "^0.1.6",
         "@fawmi/vue-google-maps": "^0.9.72",
         "@headlessui/vue": "^1.6.7",
         "@heroicons/vue": "^1.0.6",

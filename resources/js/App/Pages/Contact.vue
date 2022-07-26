@@ -86,6 +86,7 @@
                             focus:shadow-outline
                             hover:bg-red-800
                           "
+                        :class="{ 'opacity-25': processing }" :disabled="processing"
                     >
                         Contact Us
                     </button>

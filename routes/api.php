@@ -9,13 +9,15 @@ use App\Http\Handlers\API\Defibs\ListDefibsHandler;
 use App\Http\Handlers\API\Defibs\StoreDefibHandler;
 use App\Http\Handlers\API\Defibs\UpdateDefibHandler;
 use App\Http\Handlers\API\Members\StoreMemberHandler;
+use App\Http\Handlers\API\Contact\SubmitContactHandler;
 use App\Http\Handlers\API\Defibs\Notes\StoreDefibNoteHandler;
 use App\Http\Handlers\API\Defibs\Inspections\StoreDefibInspectionsHandler;
 
 Route::post('auth/login', App\Http\Handlers\API\Auth\LoginHandler::class)->name('auth:login');
 
 Route::get('/ping', HealthcheckHandler::class)->name('ping');
-Route::get('defibs/', ListDefibsHandler::class)->name('defibs:index');
+Route::get('/defibs', ListDefibsHandler::class)->name('defibs:index');
+Route::post('/contact', SubmitContactHandler::class)->name('contact:submit');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('defibs')->as('defibs:')->group(function () {
