@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {onMounted, ref} from 'vue';
 
 import useDefibs from "../Services/defibs";
 

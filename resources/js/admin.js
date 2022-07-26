@@ -14,7 +14,7 @@ window.axios.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 
-import {createApp} from "vue/dist/vue.esm-bundler.js";
+import {createApp} from 'vue';
 
 import router from './Admin/Router';
 import '../css/admin.css';

@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import {createApp} from "vue";
+import {createApp} from 'vue';
 import VueGoogleMaps from '@fawmi/vue-google-maps';
 
 import App from './App/App.vue';
