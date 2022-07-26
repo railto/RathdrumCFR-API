@@ -2,7 +2,7 @@
     <GMapMap
         :center="center"
         :zoom="14"
-        style="width: 50vw; height: 600px; margin-left: auto; margin-right: auto"
+        style="width: 100%; height: 650px;"
         map-type-id="hybrid"
     >
         <GMapMarker
