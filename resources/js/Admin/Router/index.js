@@ -37,10 +37,11 @@ const routes = [
                 name: 'login',
             }
         ]
-    }
+    },
 ];
 
 export default createRouter({
     history: createWebHistory(),
     routes,
+    linkExactActiveClass: 'text-gray-300',
 });
