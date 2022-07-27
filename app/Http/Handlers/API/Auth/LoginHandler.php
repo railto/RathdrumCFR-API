@@ -14,13 +14,19 @@ class LoginHandler
     {
         $request->authenticate();
 
-        $token = $request->user()->createToken($request->fingerprint());
+        $user = $request->user();
 
-        $user = [
-            'name' => $request->user()->name,
-            'email' => $request->user()->email,
+        if (!$user) {
+            return new JsonResponse(['error' => 'Authentication Failure'], Http::UNAUTHORIZED);
+        }
+
+        $token = $user->createToken($request->fingerprint());
+
+        $userArray = [
+            'name' => $user->name,
+            'email' => $user->email,
         ];
 
-        return new JsonResponse(['token' => $token->plainTextToken, 'user' => $user], Http::OK);
+        return new JsonResponse(['token' => $token->plainTextToken, 'user' => $userArray], Http::OK);
     }
 }

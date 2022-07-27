@@ -11,7 +11,13 @@ class StoreDefibInspectionRequest extends FormRequest
 {
     public function authorize(Request $request): bool
     {
-        return $request->user()->can('defib.inspect');
+        $user = $request->user();
+
+        if (!$user) {
+            return false;
+        }
+
+        return $user->can('defib.inspect');
     }
 
     /**

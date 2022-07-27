@@ -11,7 +11,13 @@ class StoreDefibRequest extends FormRequest
 {
     public function authorize(Request $request): bool
     {
-        return $request->user()->can('defib.create');
+        $user = $request->user();
+
+        if (!$user) {
+            return false;
+        }
+
+        return $user->can('defib.create');
     }
 
     /**
