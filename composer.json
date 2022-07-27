@@ -59,6 +59,12 @@
         ],
         "coverage": [
             "./vendor/bin/pest --parallel --coverage"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
+        ],
+        "larastan": [
+            "./vendor/bin/phpstan analyse"
         ]
     },
     "extra": {

@@ -36,9 +36,12 @@ jobs:
         run: php artisan key:generate
 
       - name: Execute tests
-        run: composer run coverage
+        run: composer coverage
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Run Linter
-        run: ./vendor/bin/pint
+        run: composer pint
+
+      - name: Run Static Analysis
+        run: composer larastan
