@@ -14,6 +14,13 @@ class DefibInspectionResource extends JsonResource
      */
     public function toArray($request): array
     {
-        return parent::toArray($request);
+        return [
+            'uuid' => $this->resource->uuid,
+            'author' => $this->resource->user->name,
+            'member' => $this->resource->member->name,
+            'notes' => $this->resource->notes,
+            'inspected_at' => $this->resource->inspected_at->format('Y-m-d H:i:s'),
+            'pads_expire_at' => $this->resource->pads_expire_at->format('Y-m-d'),
+        ];
     }
 }
