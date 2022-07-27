@@ -11,18 +11,8 @@ class ContactFormMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    protected string $name;
-    protected string $email;
-    protected string $message;
-
-    /**
-     * @param mixed[] $form
-     */
-    public function __construct(array $form)
+    public function __construct(protected string $name, protected string $email, protected string $message)
     {
-        $this->name = $form['name'];
-        $this->email = $form['email'];
-        $this->message = $form['message'];
     }
 
     public function build(): self

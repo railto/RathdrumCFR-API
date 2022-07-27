@@ -14,7 +14,7 @@ class SubmitContactHandler
 {
     public function __invoke(SubmitContactRequest $request): JsonResponse
     {
-        Mail::to(config('app.admin_email'))->send(new ContactFormMail($request->validated()));
+        Mail::to(config('app.admin_email'))->send(new ContactFormMail(strval($request->get('name')), strval($request->get('email')), strval($request->get('message'))));
 
         return new JsonResponse(['data' => ['success' => true]], Http::CREATED);
     }

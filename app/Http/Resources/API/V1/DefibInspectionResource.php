@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\API\V1;
 
+use App\Models\DefibInspection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin DefibInspection
+ */
 class DefibInspectionResource extends JsonResource
 {
     /**
@@ -15,12 +19,12 @@ class DefibInspectionResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'uuid' => $this->resource->uuid,
-            'author' => $this->resource->user->name,
-            'member' => $this->resource->member->name,
-            'notes' => $this->resource->notes,
-            'inspected_at' => $this->resource->inspected_at->format('Y-m-d H:i:s'),
-            'pads_expire_at' => $this->resource->pads_expire_at->format('Y-m-d'),
+            'uuid' => $this->uuid,
+            'author' => $this->user?->name,
+            'member' => $this->member?->name,
+            'notes' => $this->notes,
+            'inspected_at' => $this->inspected_at,
+            'pads_expire_at' => $this->pads_expire_at,
         ];
     }
 }

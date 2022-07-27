@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\API\V1;
 
+use App\Models\Defib;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Defib
+ */
 class DefibResource extends JsonResource
 {
     /**
@@ -15,21 +19,21 @@ class DefibResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'name' => $this->resource->name,
-            'location' => $this->resource->location,
-            'coordinates' => $this->resource->coordinates,
+            'name' => $this->name,
+            'location' => $this->location,
+            'coordinates' => $this->coordinates,
             $this->mergeWhen(auth('sanctum')->check(), [
-                'uuid' => $this->resource->uuid,
-                'display_on_map' => $this->resource->display_on_map,
-                'model' => $this->resource->model,
-                'serial' => $this->resource->serial,
-                'owner' => $this->resource->owner,
-                'last_inspected_by' => $this->resource->last_inspected_by,
-                'last_inspected_at' => $this->resource->last_inspected_at,
-                'last_serviced_at' => $this->resource->last_services_at,
-                'pads_expire_at' => $this->resource->pads_expire_at,
-                'notes' => DefibNoteResource::collection($this->resource->notes),
-                'inspections' => DefibInspectionResource::collection($this->resource->inspections),
+                'uuid' => $this->uuid,
+                'display_on_map' => $this->display_on_map,
+                'model' => $this->model,
+                'serial' => $this->serial,
+                'owner' => $this->owner,
+                'last_inspected_by' => $this->last_inspected_by,
+                'last_inspected_at' => $this->last_inspected_at,
+                'last_serviced_at' => $this->last_serviced_at,
+                'pads_expire_at' => $this->pads_expire_at,
+                'notes' => DefibNoteResource::collection($this->notes),
+                'inspections' => DefibInspectionResource::collection($this->inspections),
             ]),
         ];
     }

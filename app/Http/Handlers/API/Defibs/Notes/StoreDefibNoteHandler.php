@@ -20,7 +20,11 @@ class StoreDefibNoteHandler
             return new JsonResponse([], Http::NOT_FOUND);
         }
 
-        $defib->notes()->create($request->validated());
+        $data = [
+            'note' => $request->get('note'),
+        ];
+
+        $defib->notes()->create($data);
 
         return new JsonResponse(['data' => DefibResource::make($defib->fresh())], Http::CREATED);
     }

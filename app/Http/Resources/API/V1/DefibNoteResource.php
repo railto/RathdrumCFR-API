@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\API\V1;
 
+use App\Models\DefibNote;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin DefibNote
+ */
 class DefibNoteResource extends JsonResource
 {
     /**
@@ -15,10 +19,10 @@ class DefibNoteResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'uuid' => $this->resource->uuid,
-            'author' => $this->resource->user->name,
-            'note' => $this->resource->note,
-            'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
+            'uuid' => $this->uuid,
+            'author' => $this->user?->name,
+            'note' => $this->note,
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
         ];
     }
 }
