@@ -2,20 +2,19 @@
 
 namespace App\Http\Requests\API\Defibs;
 
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class UpdateDefibRequest extends FormRequest
 {
-    public function authorize(Request $request): bool
+    public function __construct(private Authenticatable $user)
     {
-        $user = $request->user();
+        parent::__construct();
+    }
 
-        if (!$user) {
-            return false;
-        }
-
-        return $user->can('defib.update');
+    public function authorize(): bool
+    {
+        return $this->user->can('defib.update');
     }
 
     /**
