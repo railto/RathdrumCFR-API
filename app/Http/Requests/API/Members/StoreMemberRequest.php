@@ -14,6 +14,9 @@ class StoreMemberRequest extends FormRequest
         return $request->user()->can('member.create');
     }
 
+    /**
+     * @return string[][]
+     */
     public function rules(): array
     {
         return [

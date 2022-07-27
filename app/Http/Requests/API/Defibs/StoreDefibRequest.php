@@ -14,6 +14,9 @@ class StoreDefibRequest extends FormRequest
         return $request->user()->can('defib.create');
     }
 
+    /**
+     * @return string[][]
+     */
     public function rules(): array
     {
         return [

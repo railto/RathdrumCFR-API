@@ -8,6 +8,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class DefibNoteResource extends JsonResource
 {
+    /**
+     * @param $request
+     * @return mixed[]
+     */
     public function toArray($request): array
     {
         return [

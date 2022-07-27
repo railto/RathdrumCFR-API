@@ -14,6 +14,9 @@ class StoreDefibNoteRequest extends FormRequest
         return $request->user()->can('defib.note');
     }
 
+    /**
+     * @return string[][]
+     */
     public function rules(): array
     {
         return [

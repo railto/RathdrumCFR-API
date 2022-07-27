@@ -8,7 +8,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class DefibInspectionResource extends JsonResource
 {
-    public function toArray($request): array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+    /**
+     * @param $request
+     * @return mixed[]
+     */
+    public function toArray($request): array
     {
         return parent::toArray($request);
     }

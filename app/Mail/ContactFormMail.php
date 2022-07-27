@@ -15,6 +15,9 @@ class ContactFormMail extends Mailable
     protected string $email;
     protected string $message;
 
+    /**
+     * @param mixed[] $form
+     */
     public function __construct(array $form)
     {
         $this->name = $form['name'];

@@ -14,6 +14,9 @@ class StoreDefibInspectionRequest extends FormRequest
         return $request->user()->can('defib.inspect');
     }
 
+    /**
+     * @return string[][]
+     */
     public function rules(): array
     {
         return [
