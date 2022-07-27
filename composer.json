@@ -57,13 +57,13 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "coverage": [
+        "test": [
             "./vendor/bin/pest --parallel --coverage"
         ],
-        "pint": [
+        "lint": [
             "./vendor/bin/pint"
         ],
-        "larastan": [
+        "analyse": [
             "./vendor/bin/phpstan analyse"
         ]
     },
